@@ -1,0 +1,17 @@
+=DESKTOP
+    @media screen and (max-width: 1047px)
+        @content
+=TABLET
+    @media screen and (max-width: 768px)
+        @content
+=MOBAILE
+    @media screen and (max-width: 460px)
+        @content
+@mixin width_height($w,$h)
+    width: $w
+    height: $h
+@mixin flex($jC,$aA,$fD)
+    display: flex
+    justify-content: $jC
+    align-items: $aA
+    flex-direction: $fD

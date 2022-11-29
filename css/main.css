@@ -113,4 +113,8 @@ a, a:hover {
   height: 50px;
   text-align: center;
   line-height: 50px;
+}
+
+#info {
+  display: block;
 }/*# sourceMappingURL=main.css.map */

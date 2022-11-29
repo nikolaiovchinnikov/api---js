@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@types/jquery": "^3.5.14"
+    "@types/jquery": "^3.5.14",
+    "uniq": "^1.0.1"
   }
 }

@@ -1,3 +1,4 @@
+import { getTabel } from "./GetTable";
 const countryName:HTMLButtonElement | null = document.querySelector("#country-name");
 const body:HTMLElement| null = document.querySelector("body")
 const form:HTMLElement | null = document.querySelector("#form");
@@ -5,40 +6,7 @@ const preloaderBox :HTMLImageElement | null = document.querySelector(".preloader
 const tagList:NodeListOf<HTMLElement> = document.querySelectorAll("#name, #region, #subregion, #capital, #flag");
 const flag:HTMLImageElement | null = document.querySelector(".flagImg");
 const infoBtn:HTMLButtonElement | null = document.querySelector("#info")
-const getTabel = () => {
-    const contenerTable:HTMLElement = document.createElement("div")
-    const tabelElements:HTMLElement = document.createElement("div")
-    tabelElements.className = "table";
-    contenerTable.className = "table_contener"
-    contenerTable.appendChild(tabelElements)
-    interface Elements {
-        code: HTMLDivElement
-        flag: HTMLDivElement
-        name: HTMLDivElement
-        capital: HTMLDivElement
-        population: HTMLDivElement
-    }
-    const elemets:Elements = {
-        code: document.createElement("div"),
-        flag: document.createElement("img"),
-        name: document.createElement("div"),
-        capital: document.createElement("div"),
-        population: document.createElement("div"),
-    }
-    const listTag = []
-    const objectName = Object.keys(elemets) 
-    let index:number = 0
-    for (let i of Object.values(elemets)) {
-        i.className = objectName[index]
-        tabelElements.appendChild(i)
-        listTag.push(i)
-        index++
-    }
-    listTag.push(tabelElements)
-    listTag.push(contenerTable)
-    return listTag
-}
-getTabel()
+
 if (form && countryName && flag && preloaderBox && infoBtn && body){
     form.addEventListener("submit",(e)=>{
         preloaderBox.style.display = "flex";

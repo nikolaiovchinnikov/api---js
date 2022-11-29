@@ -1,11 +1,7 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
-const countryName = document.querySelector("#country-name");
-const body = document.querySelector("body");
-const form = document.querySelector("#form");
-const preloaderBox = document.querySelector(".preloader_box");
-const tagList = document.querySelectorAll("#name, #region, #subregion, #capital, #flag");
-const flag = document.querySelector(".flagImg");
-const infoBtn = document.querySelector("#info");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTabel = void 0;
 const getTabel = () => {
     const contenerTable = document.createElement("div");
     const tabelElements = document.createElement("div");
@@ -32,7 +28,19 @@ const getTabel = () => {
     listTag.push(contenerTable);
     return listTag;
 };
-getTabel();
+exports.getTabel = getTabel;
+
+},{}],2:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const GetTable_1 = require("./GetTable");
+const countryName = document.querySelector("#country-name");
+const body = document.querySelector("body");
+const form = document.querySelector("#form");
+const preloaderBox = document.querySelector(".preloader_box");
+const tagList = document.querySelectorAll("#name, #region, #subregion, #capital, #flag");
+const flag = document.querySelector(".flagImg");
+const infoBtn = document.querySelector("#info");
 if (form && countryName && flag && preloaderBox && infoBtn && body) {
     form.addEventListener("submit", (e) => {
         preloaderBox.style.display = "flex";
@@ -65,7 +73,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
             success: (response) => {
                 for (let i = 0; i < response.length; i++) {
                     const country = response[i];
-                    const tagList = getTabel();
+                    const tagList = (0, GetTable_1.getTabel)();
                     body.appendChild(tagList[6]);
                     if (country.currencies) {
                         tagList[0].innerText = country.currencies[0].code;
@@ -85,4 +93,5 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
     });
 }
 ;
-//# sourceMappingURL=maine.js.map
+
+},{"./GetTable":1}]},{},[2]);

@@ -1,4 +1,5 @@
 import { getTabel } from "./GetTable";
+import { observerFunc } from "./observer";
 const countryName:HTMLButtonElement | null = document.querySelector("#country-name");
 const body:HTMLElement| null = document.querySelector("body")
 const form:HTMLElement | null = document.querySelector("#form");
@@ -39,7 +40,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body){
             success: (response) => {
                 for (let i = 0; i < response.length; i++) {
                     const country = response[i];
-                    const tagList = getTabel()
+                    const tagList = getTabel(i)
                     body.appendChild(tagList[6])
                     if(country.currencies){
                         tagList[0].innerText = country.currencies[0].code;
@@ -48,6 +49,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body){
                     tagList[2].innerText = country.name;
                     tagList[3].innerText = country.capital;
                     tagList[4].innerText = country.population;
+                    observerFunc (".table"+i,".table_contener"+i,"1105px","4s")
                 }
                 preloaderBox.style.display = "none";
             },
@@ -58,5 +60,10 @@ if (form && countryName && flag && preloaderBox && infoBtn && body){
         })
     })
 };
+
+
+
+
+
 
 

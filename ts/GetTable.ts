@@ -1,9 +1,10 @@
 import { Elements } from "./interface";
-export const getTabel = ():Array<HTMLElement> => {
+export const getTabel = (num:Number):Array<HTMLElement> => {
     const contenerTable:HTMLElement = document.createElement("div")
     const tabelElements:HTMLElement = document.createElement("div")
-    tabelElements.className = "table";
-    contenerTable.className = "table_contener"
+    tabelElements.style.display = "flex"
+    tabelElements.className = "table" + num;
+    contenerTable.className = "table_contener" + num
     contenerTable.appendChild(tabelElements)
     const elemets:Elements = {
         code: document.createElement("div"),

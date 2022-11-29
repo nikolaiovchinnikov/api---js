@@ -59,6 +59,10 @@ a, a:hover {
   text-decoration: none;
 }
 
+body {
+  font-family: "Roboto";
+}
+
 .preloader_box {
   display: none;
   width: 100vw;
@@ -66,15 +70,6 @@ a, a:hover {
   position: fixed;
   justify-content: center;
   align-items: center;
-}
-
-.table {
-  display: flex;
-}
-
-.table_contener {
-  display: flex;
-  flex-direction: column;
 }
 
 .code {
@@ -93,7 +88,7 @@ a, a:hover {
 
 .name {
   border: 1px solid #000000;
-  width: 200px;
+  width: 300px;
   height: 50px;
   text-align: center;
   line-height: 50px;
@@ -101,7 +96,7 @@ a, a:hover {
 
 .capital {
   border: 1px solid #000000;
-  width: 200px;
+  width: 300px;
   height: 50px;
   text-align: center;
   line-height: 50px;
@@ -109,7 +104,7 @@ a, a:hover {
 
 .population {
   border: 1px solid #000000;
-  width: 200px;
+  width: 300px;
   height: 50px;
   text-align: center;
   line-height: 50px;

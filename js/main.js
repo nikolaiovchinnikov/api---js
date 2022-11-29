@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const GetTable_1 = require("./GetTable");
+const observer_1 = require("./observer");
 const countryName = document.querySelector("#country-name");
 const body = document.querySelector("body");
 const form = document.querySelector("#form");
@@ -40,7 +41,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
             success: (response) => {
                 for (let i = 0; i < response.length; i++) {
                     const country = response[i];
-                    const tagList = (0, GetTable_1.getTabel)();
+                    const tagList = (0, GetTable_1.getTabel)(i);
                     body.appendChild(tagList[6]);
                     if (country.currencies) {
                         tagList[0].innerText = country.currencies[0].code;
@@ -49,6 +50,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
                     tagList[2].innerText = country.name;
                     tagList[3].innerText = country.capital;
                     tagList[4].innerText = country.population;
+                    (0, observer_1.observerFunc)(".table" + i, ".table_contener" + i, "1105px", "4s");
                 }
                 preloaderBox.style.display = "none";
             },

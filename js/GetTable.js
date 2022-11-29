@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTabel = void 0;
-const getTabel = () => {
+const getTabel = (num) => {
     const contenerTable = document.createElement("div");
     const tabelElements = document.createElement("div");
-    tabelElements.className = "table";
-    contenerTable.className = "table_contener";
+    tabelElements.style.display = "flex";
+    tabelElements.className = "table" + num;
+    contenerTable.className = "table_contener" + num;
     contenerTable.appendChild(tabelElements);
     const elemets = {
         code: document.createElement("div"),

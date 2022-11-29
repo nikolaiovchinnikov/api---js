@@ -2,11 +2,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTabel = void 0;
-const getTabel = () => {
+const getTabel = (num) => {
     const contenerTable = document.createElement("div");
     const tabelElements = document.createElement("div");
-    tabelElements.className = "table";
-    contenerTable.className = "table_contener";
+    tabelElements.style.display = "flex";
+    tabelElements.className = "table" + num;
+    contenerTable.className = "table_contener" + num;
     contenerTable.appendChild(tabelElements);
     const elemets = {
         code: document.createElement("div"),
@@ -34,6 +35,7 @@ exports.getTabel = getTabel;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const GetTable_1 = require("./GetTable");
+const observer_1 = require("./observer");
 const countryName = document.querySelector("#country-name");
 const body = document.querySelector("body");
 const form = document.querySelector("#form");
@@ -73,7 +75,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
             success: (response) => {
                 for (let i = 0; i < response.length; i++) {
                     const country = response[i];
-                    const tagList = (0, GetTable_1.getTabel)();
+                    const tagList = (0, GetTable_1.getTabel)(i);
                     body.appendChild(tagList[6]);
                     if (country.currencies) {
                         tagList[0].innerText = country.currencies[0].code;
@@ -82,6 +84,7 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
                     tagList[2].innerText = country.name;
                     tagList[3].innerText = country.capital;
                     tagList[4].innerText = country.population;
+                    (0, observer_1.observerFunc)(".table" + i, ".table_contener" + i, "1105px", "4s");
                 }
                 preloaderBox.style.display = "none";
             },
@@ -94,4 +97,33 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
 }
 ;
 
-},{"./GetTable":1}]},{},[2]);
+},{"./GetTable":1,"./observer":3}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.observerFunc = void 0;
+const observerFunc = (id, window, left, second) => {
+    let target = document.querySelector(window);
+    const head = document.querySelector("head");
+    let element = document.querySelector(id);
+    if (element) {
+        element.style.position = 'relative';
+        element.style.right = left;
+    }
+    const options = { threshold: 1.0 };
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.intersectionRatio && element && head) {
+                element.style.animationDuration = second;
+                element.style.animationFillMode = "forwards";
+                element.style.animationName = "element";
+                head.innerHTML += `<style>\n@keyframes element {\nfrom {  right: ${left}; }\nto {  right: 0; }\n}\n</style>\n`;
+            }
+        });
+    }, options);
+    if (target) {
+        observer.observe(target);
+    }
+};
+exports.observerFunc = observerFunc;
+
+},{}]},{},[2]);

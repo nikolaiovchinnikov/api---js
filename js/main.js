@@ -2,28 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const GetTable_1 = require("./GetTable");
 const observer_1 = require("./observer");
-const countryName = document.querySelector("#country-name");
+const getListInfo_1 = require("./getListInfo");
 const body = document.querySelector("body");
 const form = document.querySelector("#form");
 const preloaderBox = document.querySelector(".preloader_box");
-const tagList = document.querySelectorAll("#name, #region, #subregion, #capital, #flag");
-const flag = document.querySelector(".flagImg");
+// const flag:HTMLImageElement | null = document.querySelector(".flagImg");
 const infoBtn = document.querySelector("#info");
-if (form && countryName && flag && preloaderBox && infoBtn && body) {
+if (form && preloaderBox && infoBtn && body) {
     form.addEventListener("submit", (e) => {
+        const countryName = document.querySelector("#country-name");
         preloaderBox.style.display = "flex";
         e.preventDefault();
         $.ajax({
             method: 'GET',
-            url: `https://restcountries.com/v2/name/${countryName.value}`,
+            url: `https://restcountries.com/v2/name/${countryName !== null ? countryName.value : "Antarctica"}`,
             success: (response) => {
                 const country = response[0];
-                tagList[0].innerText = country.name;
-                tagList[1].innerText = country.region;
-                tagList[2].innerText = country.subregion;
-                tagList[3].innerText = country.capital;
-                tagList[4].innerText = country.flag;
-                flag.setAttribute("src", country.flag);
+                (0, getListInfo_1.getListInfo)(country);
                 preloaderBox.style.display = "none";
             },
             error: (error) => {

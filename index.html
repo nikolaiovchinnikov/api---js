@@ -11,24 +11,30 @@
     <link rel="stylesheet" href="butstrrap\butstrap css\bootstrap.css"> 
     <link rel="stylesheet" href="css\main.css">
     <link rel="stylesheet" href="font\Roboto-multy\stylesheet.css">
+    <script src="butstrrap\js\jquery-3.6.1.min.js"></script>
 </head>
 <body>
-    <div class="preloader_box">
-        <img class="preloader" src="images_disaine\Spinner-2.gif" alt="">
-    </div>
-        
     <form id="form">
         <input id="country-name" type="text">
         <button id="show">Show information</button>
     </form>
-    <p><b>Name: </b><span id="name"></span></p>
+    <!-- <img class="flagImg" src="" alt="картанка флага"> -->
+    <div id="infoContener">
+    </div>
+    
+    <!-- <p><b>Name: </b><span id="name"></span></p>
     <p><b>Region: </b><span id="region"></span></p>
     <p><b>Subregion: </b><span id="subregion"></span></p>
     <p><b>Capital: </b><span id="capital"></span></p>
-    <p><b>Flag: </b><span id="flag"></span></p>
-    <img class="flagImg" src="" alt="картанка флага">
+    <p><b>Flag: </b><span id="flag"></span></p> -->
+    
+
     <button id="info">Вывести информацию о всех странах</button>
-    <script src="butstrrap\js\jquery-3.6.1.min.js"></script>
+
+    <div class="preloader_box">
+        <img class="preloader" src="images_disaine\Spinner-2.gif" alt="">
+    </div>
+
     <script src="js\bundle.js"></script>
 </body>
 </html>

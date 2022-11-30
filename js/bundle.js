@@ -34,30 +34,121 @@ exports.getTabel = getTabel;
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getListInfo = void 0;
+const objectTag_1 = require("./objectTag");
+const getListInfo = (country) => {
+    const infoContener = document.querySelector("#infoContener");
+    Object.keys(country).forEach((element, k) => {
+        const infoBoxItem = document.createElement("div");
+        infoBoxItem.className = "info_box_item";
+        let tagElement = document.createElement("H1");
+        tagElement.className = "title";
+        if (element in objectTag_1.str) {
+            tagElement.innerText = Object(objectTag_1.str)[element] + " :";
+        }
+        if (element in objectTag_1.arrayString) {
+            tagElement.innerText = Object(objectTag_1.arrayString)[element] + " :";
+        }
+        // if(element in arrayObject){
+        //     tagElement.innerText = Object(arrayObject)[element] + " :" 
+        // }
+        if (element in objectTag_1.objectObject) {
+            tagElement.innerText = Object(objectTag_1.objectObject)[element] + " :";
+        }
+        if (element in objectTag_1.arreyObjectObject) {
+            tagElement.innerText = Object(objectTag_1.arreyObjectObject)[element] + " :";
+        }
+        if (infoContener) {
+            infoContener.appendChild(infoBoxItem);
+        }
+        if (tagElement) {
+            infoBoxItem.appendChild(tagElement);
+        }
+    });
+    const title = document.querySelectorAll(".info_box_item");
+    const ischeck = Object.keys(country);
+    Object.values(country).forEach((element, k) => {
+        let tagElement = document.createElement("p");
+        tagElement.className = "string";
+        if (ischeck[k] in objectTag_1.str) {
+            tagElement.innerText = element + " :";
+            title[k].appendChild(tagElement);
+        }
+        else if (ischeck[k] in objectTag_1.arrayString) {
+            tagElement.innerText = element.join(" ,");
+            title[k].appendChild(tagElement);
+        }
+        // else if(ischeck[k] in arrayObject) {
+        //     title[k].className = "sub_contener"
+        //     Array(Object.values(element)).forEach((values, L) => {
+        //         Object.values(values).forEach((subElement, i) => {
+        //             console.log(subElement)
+        //             // const subTitle:HTMLElement = document.createElement("h2")
+        //             // subTitle.className = "sub_tatle";
+        //             // subTitle.innerText = subElement + " :"
+        //             // title[k].appendChild(subTitle)
+        //             // const el = Object.values(element)[L] as Object
+        //             // let tagElement:HTMLElement = document.createElement("p")
+        //             // tagElement.className = "values"
+        //             // tagElement.innerText = Object.values(el)[i] + " :"
+        //             // title[k].appendChild(tagElement)
+        //         });
+        //     });
+        // }
+        else if (ischeck[k] in objectTag_1.objectObject) {
+            title[k].className = "sub_contener";
+            Object.keys(element).forEach((subElement, i) => {
+                const subTitle = document.createElement("h2");
+                subTitle.className = "sub_tatle";
+                subTitle.innerText = subElement + " :";
+                title[k].appendChild(subTitle);
+                const text = document.createElement("p");
+                text.className = "values";
+                text.innerText = Object.values(element)[i];
+                title[k].appendChild(text);
+            });
+        }
+        else if (ischeck[k] in objectTag_1.arreyObjectObject) {
+            title[k].className = "sub_contener";
+            Object.values(element).forEach((subElement, i) => {
+                Object.keys(subElement).forEach((element, l) => {
+                    const subTitle = document.createElement("h2");
+                    subTitle.className = "sub_tatle";
+                    subTitle.innerText = element + " :";
+                    title[k].appendChild(subTitle);
+                    const text = document.createElement("p");
+                    text.className = "values";
+                    text.innerText = Object.values(subElement)[l];
+                    title[k].appendChild(text);
+                });
+            });
+        }
+    });
+};
+exports.getListInfo = getListInfo;
+
+},{"./objectTag":4}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const GetTable_1 = require("./GetTable");
 const observer_1 = require("./observer");
-const countryName = document.querySelector("#country-name");
+const getListInfo_1 = require("./getListInfo");
 const body = document.querySelector("body");
 const form = document.querySelector("#form");
 const preloaderBox = document.querySelector(".preloader_box");
-const tagList = document.querySelectorAll("#name, #region, #subregion, #capital, #flag");
-const flag = document.querySelector(".flagImg");
+// const flag:HTMLImageElement | null = document.querySelector(".flagImg");
 const infoBtn = document.querySelector("#info");
-if (form && countryName && flag && preloaderBox && infoBtn && body) {
+if (form && preloaderBox && infoBtn && body) {
     form.addEventListener("submit", (e) => {
+        const countryName = document.querySelector("#country-name");
         preloaderBox.style.display = "flex";
         e.preventDefault();
         $.ajax({
             method: 'GET',
-            url: `https://restcountries.com/v2/name/${countryName.value}`,
+            url: `https://restcountries.com/v2/name/${countryName !== null ? countryName.value : "Antarctica"}`,
             success: (response) => {
                 const country = response[0];
-                tagList[0].innerText = country.name;
-                tagList[1].innerText = country.region;
-                tagList[2].innerText = country.subregion;
-                tagList[3].innerText = country.capital;
-                tagList[4].innerText = country.flag;
-                flag.setAttribute("src", country.flag);
+                (0, getListInfo_1.getListInfo)(country);
                 preloaderBox.style.display = "none";
             },
             error: (error) => {
@@ -97,7 +188,91 @@ if (form && countryName && flag && preloaderBox && infoBtn && body) {
 }
 ;
 
-},{"./GetTable":1,"./observer":3}],3:[function(require,module,exports){
+},{"./GetTable":1,"./getListInfo":2,"./observer":5}],4:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.arreyObjectObject = exports.objectObject = exports.arrayString = exports.str = exports.dict = void 0;
+exports.dict = {
+    "name": ["Название", "string"],
+    "topLevelDomain": ["Домен верхнего уровня", "Array<string>"],
+    "alpha2Code": ["Альфакод2", "string"],
+    "alpha3Code": ["Альфакод3", "string"],
+    "callingCodes": ["Мобильный код", "Array<string>"],
+    "capital": ["Столица", "string"],
+    "altSpellings": ["Альтернативное имя", "Array<string>"],
+    "subregion": ["Регион континента", "string"],
+    "region": ["Регион мира", "string"],
+    "population": ["Население", "string"],
+    "latlng": ["Кординаты", "Array<string>"],
+    "demonym": ["demonym", "string"],
+    "area": ["Площадь", "string"],
+    "gini": ["gini", "string"],
+    "timezones": ["Тайм-Зона", "Array<string>"],
+    "borders": ["Границы", "Array<string>"],
+    "nativeName": ["Родное имя", "string"],
+    "numericCode": ["Числовой код", "string"],
+    "flags": ["Флаги", "Object<Object>"],
+    "currencies": ["Валюта", "Array<Object>", { "code": "Код", "name": "Имя", "symbol": "Символ" }],
+    "languages": [
+        "Язык",
+        "Array<ObjectObject>",
+        { "iso639_1": "iso639_1", "iso639_2": "iso639_2", "name": "Имя", "nativeName": "Родное имя" },
+        { "iso639_1": "iso639_1", "iso639_2": "iso639_2", "name": "Имя", "nativeName": "Родное имя" },
+    ],
+    "translations": [
+        "Перевод названия страны",
+        "Object<Object>",
+        { "br": "br", "pt": "pt", "nl": "nl", "hr": "hr", "fa": "fa", "de": "de", "es": "es", "fr": "fr", "ja": "ja", "it": "it", "hu": "hu" },
+    ],
+    "flag": ["Флаг", "string"],
+    "regionalBlocs": [
+        "Политический статус",
+        "Array<Object>",
+        { "acronym": "acronym", "name": "Имя", "otherAcronyms": "Другой acronym", }
+    ],
+    "cioc": ["Сioc", "string"],
+    "independent": ["Статус независимости", "string"],
+};
+exports.str = {
+    "name": "Название",
+    "alpha2Code": "Альфа код 2",
+    "alpha3Code": "Альфа код 3",
+    "capital": "Столица",
+    "subregion": "Суб-регион",
+    "region": "Регион",
+    "population": "Население",
+    "demonym": "demonym",
+    "area": "Площадь",
+    "gini": "gini",
+    "nativeName": "Родное имя",
+    "numericCode": "Числовой код",
+    "flag": "Флаг",
+    "cioc": "cioc",
+    "independent": "Статус независимости",
+};
+exports.arrayString = {
+    "topLevelDomain": "Домен верхнего уровня",
+    "callingCodes": "Мобильный код",
+    "altSpellings": "Альтернативное имя",
+    "latlng": "Кординаты",
+    "timezones": "Тайм зона",
+    "borders": "Границы",
+};
+// export const arrayObject = {
+//     "currencies": "Валюта",
+//     "regionalBlocs": "Политический статус",
+// }
+exports.objectObject = {
+    "translations": "Перевод названия страны",
+    "flags": "Флаги",
+};
+exports.arreyObjectObject = {
+    "languages": "Язык",
+    "currencies": "Валюта",
+    "regionalBlocs": "Политический статус",
+};
+
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.observerFunc = void 0;
@@ -126,4 +301,4 @@ const observerFunc = (id, window, left, second) => {
 };
 exports.observerFunc = observerFunc;
 
-},{}]},{},[2]);
+},{}]},{},[3]);

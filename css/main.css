@@ -60,7 +60,41 @@ a, a:hover {
 }
 
 body {
-  font-family: "Roboto";
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+.title {
+  display: flex;
+  margin-bottom: 26px;
+}
+
+.values {
+  margin-left: 243px;
+  color: red;
+  font-weight: 400;
+  position: relative;
+  top: -15px;
+}
+
+.string {
+  margin-left: 243px;
+  color: red;
+  font-weight: 400;
+  position: relative;
+  top: -40px;
+}
+
+.sub_contener {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub_tatle {
+  color: green;
+  margin-left: 100px;
+  display: flex;
+  justify-content: start;
 }
 
 .preloader_box {

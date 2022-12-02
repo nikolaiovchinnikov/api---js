@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTabel = void 0;
-const getTabel = (num) => {
+export const getTabel = (num) => {
     const contenerTable = document.createElement("div");
     const tabelElements = document.createElement("div");
     tabelElements.style.display = "flex";
@@ -28,5 +25,4 @@ const getTabel = (num) => {
     listTag.push(contenerTable);
     return listTag;
 };
-exports.getTabel = getTabel;
 //# sourceMappingURL=GetTable.js.map

@@ -1,4 +1,4 @@
-import { Elements } from "./interface";
+import { Elements } from "./interface.js";
 export const getTabel = (num:Number):Array<HTMLElement> => {
     const contenerTable:HTMLElement = document.createElement("div")
     const tabelElements:HTMLElement = document.createElement("div")

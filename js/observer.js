@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.observerFunc = void 0;
-const observerFunc = (id, window, left, second) => {
+export const observerFunc = (id, window, left, second) => {
     let target = document.querySelector(window);
     const head = document.querySelector("head");
     let element = document.querySelector(id);
@@ -24,5 +21,4 @@ const observerFunc = (id, window, left, second) => {
         observer.observe(target);
     }
 };
-exports.observerFunc = observerFunc;
 //# sourceMappingURL=observer.js.map

@@ -1,25 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getListInfo = void 0;
-const objectTag_1 = require("./objectTag");
-const getListInfo = (country) => {
+import { str, arrayString, objectObject, arreyObjectObject } from "./objectTag.js";
+import { inerRepleise } from "./replese.js";
+export const getListInfo = (country) => {
     const infoContener = document.querySelector("#infoContener");
     Object.keys(country).forEach((element, k) => {
         const infoBoxItem = document.createElement("div");
         infoBoxItem.className = "info_box_item";
-        let tagElement = document.createElement("H1");
+        const tagElement = document.createElement("h1");
         tagElement.className = "title";
-        if (element in objectTag_1.str) {
-            tagElement.innerText = Object(objectTag_1.str)[element] + " :";
+        if (element in str) {
+            tagElement.innerText = Object(str)[element] + " :";
         }
-        if (element in objectTag_1.arrayString) {
-            tagElement.innerText = Object(objectTag_1.arrayString)[element] + " :";
+        else if (element in arrayString) {
+            tagElement.innerText = Object(arrayString)[element] + " :";
         }
-        if (element in objectTag_1.objectObject) {
-            tagElement.innerText = Object(objectTag_1.objectObject)[element] + " :";
+        else if (element in objectObject) {
+            tagElement.innerText = Object(objectObject)[element] + " :";
         }
-        if (element in objectTag_1.arreyObjectObject) {
-            tagElement.innerText = Object(objectTag_1.arreyObjectObject)[element] + " :";
+        else if (element in arreyObjectObject) {
+            tagElement.innerText = Object(arreyObjectObject)[element] + " :";
         }
         if (infoContener) {
             infoContener.appendChild(infoBoxItem);
@@ -31,32 +29,34 @@ const getListInfo = (country) => {
     const title = document.querySelectorAll(".info_box_item");
     const ischeck = Object.keys(country);
     Object.values(country).forEach((element, k) => {
-        let tagElement = document.createElement("p");
+        const tagElement = document.createElement("p");
         tagElement.className = "string";
-        if (ischeck[k] in objectTag_1.str) {
+        if (ischeck[k] in str) {
+            let tagElement = ischeck[k] === Object.keys(str)[12] ? inerRepleise("a", "link1", element) : inerRepleise("p", "string");
+            tagElement.innerText = element + " :";
+            title[k].appendChild(tagElement);
             tagElement.innerText = element + " :";
             title[k].appendChild(tagElement);
         }
-        else if (ischeck[k] in objectTag_1.arrayString) {
+        else if (ischeck[k] in arrayString) {
             tagElement.innerText = element.join(" ,");
             title[k].appendChild(tagElement);
         }
-        else if (ischeck[k] in objectTag_1.objectObject) {
+        else if (ischeck[k] in objectObject) {
             title[k].className = "sub_contener";
             Object.keys(element).forEach((subElement, i) => {
                 const subTitle = document.createElement("h2");
                 subTitle.className = "sub_tatle";
                 subTitle.innerText = subElement + " :";
                 title[k].appendChild(subTitle);
-                const text = document.createElement("p");
-                text.className = "values";
+                const text = ischeck[k] === Object.keys(objectObject)[1] ? inerRepleise("a", "link2", Object.values(element)[i]) : inerRepleise("p", "values");
                 text.innerText = Object.values(element)[i];
                 title[k].appendChild(text);
             });
         }
-        else if (ischeck[k] in objectTag_1.arreyObjectObject) {
+        else if (ischeck[k] in arreyObjectObject) {
             title[k].className = "sub_contener";
-            Object.values(element).forEach((subElement, i) => {
+            Object.values(element).forEach((subElement) => {
                 Object.keys(subElement).forEach((element, l) => {
                     const subTitle = document.createElement("h2");
                     subTitle.className = "sub_tatle";
@@ -69,7 +69,7 @@ const getListInfo = (country) => {
                 });
             });
         }
+        ;
     });
 };
-exports.getListInfo = getListInfo;
 //# sourceMappingURL=getListInfo.js.map

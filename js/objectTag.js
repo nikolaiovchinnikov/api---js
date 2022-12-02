@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.arreyObjectObject = exports.objectObject = exports.arrayString = exports.str = void 0;
-exports.str = {
+export const str = {
     "name": "Название",
     "alpha2Code": "Альфа код 2",
     "alpha3Code": "Альфа код 3",
@@ -18,7 +15,7 @@ exports.str = {
     "cioc": "cioc",
     "independent": "Статус независимости",
 };
-exports.arrayString = {
+export const arrayString = {
     "topLevelDomain": "Домен верхнего уровня",
     "callingCodes": "Мобильный код",
     "altSpellings": "Альтернативное имя",
@@ -26,11 +23,11 @@ exports.arrayString = {
     "timezones": "Тайм зона",
     "borders": "Границы",
 };
-exports.objectObject = {
+export const objectObject = {
     "translations": "Перевод названия страны",
     "flags": "Флаги",
 };
-exports.arreyObjectObject = {
+export const arreyObjectObject = {
     "languages": "Язык",
     "currencies": "Валюта",
     "regionalBlocs": "Политический статус",

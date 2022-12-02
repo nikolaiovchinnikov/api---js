@@ -8,33 +8,33 @@
     <meta name="description" content="информация для поисковиков"> -->
     <title>Document</title>
     <!-- <link rel="icon" href="images_index\myicon.ico"> -->
-    <link rel="stylesheet" href="butstrrap\butstrap css\bootstrap.css"> 
+    <!-- <link rel="stylesheet" href="butstrrap\butstrap css\bootstrap.css">  -->
     <link rel="stylesheet" href="css\main.css">
     <link rel="stylesheet" href="font\Roboto-multy\stylesheet.css">
+    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="butstrrap\js\jquery-3.6.1.min.js"></script>
+    <meta content="text/plain">
 </head>
 <body>
-    <form id="form">
-        <input id="country-name" type="text">
-        <button id="show">Show information</button>
-    </form>
-    <!-- <img class="flagImg" src="" alt="картанка флага"> -->
-    <div id="infoContener">
+    <div class="contener">
+        <div id="infoContener">
+            <form id="form">
+                <input id="country-name" type="text">
+                <button id="show">Show information</button>
+            </form>
+        </div>
+        <div id="map"></div>
     </div>
     
-    <!-- <p><b>Name: </b><span id="name"></span></p>
-    <p><b>Region: </b><span id="region"></span></p>
-    <p><b>Subregion: </b><span id="subregion"></span></p>
-    <p><b>Capital: </b><span id="capital"></span></p>
-    <p><b>Flag: </b><span id="flag"></span></p> -->
-    
-
     <button id="info">Вывести информацию о всех странах</button>
-
+    
     <div class="preloader_box">
         <img class="preloader" src="images_disaine\Spinner-2.gif" alt="">
     </div>
+    
+    <script src="js\main.js" type="module"></script>
 
-    <script src="js\bundle.js"></script>
+
 </body>
 </html>
